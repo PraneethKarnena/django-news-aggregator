@@ -21,6 +21,7 @@ class UrlModel(models.Model):
 
     keywords = models.TextField(null=True, blank=True)
     summary = models.TextField(null=True, blank=True)
+    title = models.TextField(null=True, blank=True)
 
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
