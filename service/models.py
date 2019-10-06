@@ -3,7 +3,7 @@ from django.db import models
 
 class NewsSourceModel(models.Model):
     name = models.CharField(max_length=250, null=False, blank=False)
-    code = models.CharField(max_length=3, null=False, blank=False)
+    code = models.CharField(max_length=3, null=False, blank=False, unique=True)
 
     top_stories_url = models.URLField(null=False, blank=False)
     sports_url = models.URLField(null=False, blank=False)
@@ -19,6 +19,9 @@ class UrlModel(models.Model):
     url = models.URLField(null=False, blank=False)
     news_source = models.ForeignKey(NewsSourceModel, on_delete=models.CASCADE, null=False, blank=False)
 
+    keywords = models.TextField(null=True, blank=True)
+    summary = models.TextField(null=True, blank=True)
+
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
 
@@ -26,7 +29,7 @@ class UrlModel(models.Model):
         ordering = ['-updated']
 
     def __str__(self):
-        return f'{self.news_source.name}'
+        return f'{self.news_source.name} - {self.url}'
 
 
 class CategoryUrlsModel(models.Model):
@@ -48,4 +51,4 @@ class CategoryUrlsModel(models.Model):
         ordering = ['-updated']
 
     def __str__(self):
-        return f'{self.news_cat} - {self.news_source.name}'
+        return self.news_cat
