@@ -45,21 +45,24 @@ def fetch_news(news_cat):
         MAX_LINKS = 5 # Max number of links to extract from each News Source
         for i in range(MAX_LINKS):
 
-            # Parse links and extract Keywords and Summary using NLP
-            article = Article(f['entries'][i]['link'])
-            article.download()
-            article.parse()
-            article.nlp()
+            try:
+                # Parse links and extract Keywords and Summary using NLP
+                article = Article(f['entries'][i]['link'])
+                article.download()
+                article.parse()
+                article.nlp()
 
-            news_links.append(
-                {
-                    'url': f['entries'][i]['link'],
-                    'keywords': article.keywords,
-                    'summary': article.summary,
-                    'news_source_id': source['id'],
-                    'title': f['entries'][i]['title'],
-                }
-            )
+                news_links.append(
+                    {
+                        'url': f['entries'][i]['link'],
+                        'keywords': article.keywords,
+                        'summary': article.summary,
+                        'news_source_id': source['id'],
+                        'title': f['entries'][i]['title'],
+                    }
+                )
+            except:
+                continue
 
     # Now compare News links for duplicates
     pop_indexes = []
