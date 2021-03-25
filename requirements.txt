@@ -20,7 +20,7 @@ pylint-django==2.0.11
 pylint-plugin-utils==0.5
 python-dateutil==2.8.0
 pytz==2019.2
-PyYAML==5.1.2
+PyYAML==5.4
 requests==2.22.0
 requests-file==1.4.3
 six==1.12.0
